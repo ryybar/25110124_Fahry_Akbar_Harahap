@@ -53,6 +53,14 @@ public final class KoneksiDB {
                     "Nilai db.port harus berupa angka, contoh 3306. Isi saat ini: "
                     + port);
         }
+        int nomorPort = Integer.parseInt(port);
+        if (nomorPort < 1 || nomorPort > 65535) {
+            throw new SQLException("Nilai db.port harus antara 1 dan 65535.");
+        }
+        if ("ISI_PASSWORD_LOKAL".equals(konfigurasi.getProperty("db.password", ""))) {
+            throw new SQLException("Ganti ISI_PASSWORD_LOKAL dengan password akun lab_p06 "
+                    + "pada config/database.properties.");
+        }
         return konfigurasi;
     }
 
